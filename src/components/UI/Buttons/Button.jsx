@@ -4,7 +4,7 @@ import classes from "./Button.module.css";
 const Button = (props) => {
   return (
     <button className={classes.btn}>
-      Моя кнопка
+      {props.children}
     </button>
   );
 };
