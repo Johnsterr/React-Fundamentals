@@ -7,10 +7,9 @@ import PostItem from "./components/PostItem";
 function App() {
   return (
     <div className="App">
-      <PostItem/>
-      <PostItem/>
-      <PostItem/>
-      <PostItem/>
+      <PostItem post={{ id: 1, title: "JavaScript", body: "JavaScript - язык программирования" }} />
+      <PostItem post={{ id: 2, title: "JavaScript", body: "JavaScript - язык программирования" }} />
+      <PostItem post={{ id: 3, title: "JavaScript", body: "JavaScript - язык программирования" }} />
     </div>
   );
 }
