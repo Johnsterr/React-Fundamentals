@@ -1,15 +1,18 @@
-import React from "react";
-import Counter from "./components/Counter.jsx";
-import ClassCounter from "./components/ClassCounter.jsx";
+import React, { useState } from "react";
 import "./styles/App.css";
 import PostItem from "./components/PostItem";
 
 function App() {
+  const [posts, setPosts] = useState([
+    { id: 1, title: "HTML", body: "HyperText Markup Language — язык гипертекстовой разметки" },
+    { id: 2, title: "CSS", body: "Cascading Style Sheets - каскадные таблицы стилей" },
+    { id: 3, title: "JavaScript", body: "JavaScript - язык программирования" },
+  ]);
   return (
     <div className="App">
-      <PostItem post={{ id: 1, title: "JavaScript", body: "JavaScript - язык программирования" }} />
-      <PostItem post={{ id: 2, title: "JavaScript", body: "JavaScript - язык программирования" }} />
-      <PostItem post={{ id: 3, title: "JavaScript", body: "JavaScript - язык программирования" }} />
+      {posts.map((post) =>
+        <PostItem post={post} key={post.id} />,
+      )}
     </div>
   );
 }
