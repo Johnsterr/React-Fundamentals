@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./styles/App.css";
 import PostList from "./components/PostList.jsx";
 import Button from "./components/UI/Buttons/Button.jsx";
@@ -12,10 +12,13 @@ function App() {
   ]);
 
   const [title, setTitle] = useState("");
+  
+  const bodyInputRef = useRef();
 
   const addNewPost = (event) => {
     event.preventDefault();
     console.log(title);
+    console.log(bodyInputRef.current.value);
   };
 
   return (
@@ -28,7 +31,12 @@ function App() {
           value={title}
           onChange={event => setTitle(event.target.value)}
         />
-        <Input type="text" placeholder="Описание поста" />
+        {/* Неуправляемый компонент */}
+        <Input
+          type="text"
+          placeholder="Описание поста"
+          ref={bodyInputRef}
+        />
         <Button onClick={addNewPost}>Создать пост</Button>
       </form>
       <PostList posts={posts} title="Список постов" />
