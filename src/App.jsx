@@ -10,16 +10,13 @@ function App() {
     { id: 3, title: "JavaScript", body: "JavaScript - язык программирования" },
   ]);
 
-  // const addNewPost = (event) => {
-  //   event.preventDefault();
-  //   setPosts([...posts, { ...post, id: Date.now() }]); // Set new state for controlled component
-  //   // Clear inputs
-  //   setPost({ title: "", body: "" });
-  // };
+  const createPost = (newPost) => {
+    setPosts([...posts, newPost]);
+  };
 
   return (
     <div className="App">
-      <PostForm />
+      <PostForm create={createPost} />
       <PostList posts={posts} title="Список постов" />
     </div>
   );

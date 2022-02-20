@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import Input from "./UI/Inputs/Input.jsx";
 import Button from "./UI/Buttons/Button.jsx";
 
-const PostForm = () => {
+const PostForm = ({ create }) => {
   const [post, setPost] = useState({ title: "", body: "" });
+
+  const addNewPost = (event) => {
+    event.preventDefault();
+    const newPost = { ...post, id: Date.now() };
+    create(newPost);
+    setPost({ title: "", body: "" });
+  };
 
   return (
     <form>
@@ -19,7 +26,7 @@ const PostForm = () => {
         value={post.body}
         onChange={event => setPost({ ...post, body: event.target.value })}
       />
-      {/*<Button onClick={addNewPost}>Создать пост</Button>*/}
+      <Button onClick={addNewPost}>Создать пост</Button>
     </form>
   );
 };
