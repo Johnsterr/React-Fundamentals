@@ -12,7 +12,7 @@ function App() {
   ]);
 
   const [title, setTitle] = useState("");
-  
+
   const bodyInputRef = useRef();
 
   const addNewPost = (event) => {
@@ -31,12 +31,13 @@ function App() {
           value={title}
           onChange={event => setTitle(event.target.value)}
         />
+        <input type="text" ref={bodyInputRef} />
         {/* Неуправляемый компонент */}
-        <Input
-          type="text"
-          placeholder="Описание поста"
-          ref={bodyInputRef}
-        />
+        {/*<Input*/}
+        {/*  type="text"*/}
+        {/*  placeholder="Описание поста"*/}
+        {/*  ref={bodyInputRef}*/}
+        {/*/>*/}
         <Button onClick={addNewPost}>Создать пост</Button>
       </form>
       <PostList posts={posts} title="Список постов" />
