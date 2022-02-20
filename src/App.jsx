@@ -10,20 +10,13 @@ function App() {
     { id: 2, title: "CSS", body: "Cascading Style Sheets - каскадные таблицы стилей" },
     { id: 3, title: "JavaScript", body: "JavaScript - язык программирования" },
   ]);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [post, setPost] = useState({ title: "", body: "" });
 
   const addNewPost = (event) => {
     event.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title,
-      body,
-    };
-    setPosts([...posts, newPost]); // Set new state for controlled component
+    setPosts([...posts, { ...post, id: Date.now() }]); // Set new state for controlled component
     // Clear inputs
-    setTitle("");
-    setBody("");
+    setPost({ title: "", body: "" });
   };
 
   return (
@@ -32,14 +25,14 @@ function App() {
         <Input
           type="text"
           placeholder="Название поста"
-          value={title}
-          onChange={event => setTitle(event.target.value)}
+          value={post.title}
+          onChange={event => setPost({ ...post, title: event.target.value })}
         />
         <Input
           type="text"
           placeholder="Описание поста"
-          value={body}
-          onChange={event => setBody(event.target.value)}
+          value={post.body}
+          onChange={event => setPost({ ...post, body: event.target.value })}
         />
         <Button onClick={addNewPost}>Создать пост</Button>
       </form>
