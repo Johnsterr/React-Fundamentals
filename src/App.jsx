@@ -14,10 +14,15 @@ function App() {
     setPosts([...posts, newPost]);
   };
 
+  // Get post from child component
+  const removePost = (post) => {
+    setPosts(posts.filter(item => item.id !== post.id));
+  };
+
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList posts={posts} title="Список постов" />
+      <PostList remove={removePost} posts={posts} title="Список постов" />
     </div>
   );
 }
