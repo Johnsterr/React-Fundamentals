@@ -11,7 +11,7 @@ function App() {
   ]);
   return (
     <div className="App">
-      <Button>Создать пост</Button>
+      <Button disabled>Создать пост</Button>
       <PostList posts={posts} title="Список постов" />
     </div>
   );
