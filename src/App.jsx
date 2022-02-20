@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./styles/App.css";
 import PostList from "./components/PostList.jsx";
+import Button from "./components/UI/Buttons/Button.jsx";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -10,6 +11,7 @@ function App() {
   ]);
   return (
     <div className="App">
+      <Button></Button>
       <PostList posts={posts} title="Список постов" />
     </div>
   );
