@@ -3,14 +3,27 @@ import "./styles/App.css";
 import PostList from "./components/PostList.jsx";
 import PostForm from "./components/PostForm.jsx";
 import Select from "./components/UI/Selects/Select.jsx";
+import Input from "./components/UI/Inputs/Input.jsx";
 
 function App() {
   const [posts, setPosts] = useState([
-    { id: 1, title: "HTML", body: "HyperText Markup Language — язык гипертекстовой разметки" },
-    { id: 2, title: "CSS", body: "Cascading Style Sheets - каскадные таблицы стилей" },
-    { id: 3, title: "JavaScript", body: "JavaScript - язык программирования" },
+    { id: 1, title: "HTML", body: "Язык гипертекстовой разметки" },
+    { id: 2, title: "CSS", body: "Каскадные таблицы стилей" },
+    { id: 3, title: "JavaScript", body: "Простой язык программирования" },
+    { id: 4, title: "Python", body: "Еще один язык программирования" },
   ]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
+
+  function getSortedPosts() {
+    console.log("Call getSortedPosts function");
+    if (selectedSort) {
+      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
+    }
+    return posts;
+  }
+
+  const sortedPosts = getSortedPosts();
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -23,7 +36,6 @@ function App() {
 
   const sortPosts = (sort) => {
     setSelectedSort(sort);
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
   };
 
   return (
@@ -31,6 +43,11 @@ function App() {
       <PostForm create={createPost} />
       <hr style={{ margin: "16px 0" }} />
       <div>
+        <Input
+          placeholder="Поиск..."
+          value={searchQuery}
+          onChange={event => setSearchQuery(event.target.value)}
+        />
         <Select
           defaultValue={"Сортировка:"}
           options={[
@@ -42,7 +59,7 @@ function App() {
         />
       </div>
       {posts.length !== 0
-        ? <PostList remove={removePost} posts={posts} title="Список постов" />
+        ? <PostList remove={removePost} posts={sortedPosts} title="Список постов" />
         : <h2 style={{ textAlign: "center", marginTop: "16px" }}>Список постов пуст</h2>
       }
     </div>
