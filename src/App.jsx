@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import "./styles/App.css";
 import PostList from "./components/PostList.jsx";
 import PostForm from "./components/PostForm.jsx";
@@ -15,15 +15,17 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
 
-  function getSortedPosts() {
-    console.log("Call getSortedPosts function");
+  const sortedPosts = useMemo(() => {
+    console.log("Call useMemo hook in sortedPosts");
     if (selectedSort) {
       return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
     }
     return posts;
-  }
+  }, [selectedSort, posts]);
 
-  const sortedPosts = getSortedPosts();
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+  }, [searchQuery, sortedPosts]);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -58,8 +60,8 @@ function App() {
           onChange={sortPosts}
         />
       </div>
-      {posts.length !== 0
-        ? <PostList remove={removePost} posts={sortedPosts} title="Список постов" />
+      {sortedAndSearchedPosts.length !== 0
+        ? <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Список постов" />
         : <h2 style={{ textAlign: "center", marginTop: "16px" }}>Список постов пуст</h2>
       }
     </div>
