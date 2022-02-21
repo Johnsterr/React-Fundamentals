@@ -10,6 +10,7 @@ function App() {
     { id: 2, title: "CSS", body: "Cascading Style Sheets - каскадные таблицы стилей" },
     { id: 3, title: "JavaScript", body: "JavaScript - язык программирования" },
   ]);
+  const [selectedSort, setSelectedSort] = useState("");
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -18,6 +19,11 @@ function App() {
   // Get post from child component
   const removePost = (post) => {
     setPosts(posts.filter(item => item.id !== post.id));
+  };
+
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
   };
 
   return (
@@ -31,6 +37,8 @@ function App() {
             { value: "title", name: "По названию" },
             { value: "body", name: "По описанию" },
           ]}
+          value={selectedSort}
+          onChange={sortPosts}
         />
       </div>
       {posts.length !== 0
