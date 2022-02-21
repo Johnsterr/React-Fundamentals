@@ -3,6 +3,8 @@ import "./styles/App.css";
 import PostList from "./components/PostList.jsx";
 import PostForm from "./components/PostForm.jsx";
 import PostFilter from "./components/PostFilter.jsx";
+import Modal from "./components/UI/Modal/Modal.jsx";
+import Button from "./components/UI/Buttons/Button.jsx";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -12,6 +14,7 @@ function App() {
     { id: 4, title: "Python", body: "Еще один язык программирования" },
   ]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [modal, setModal] = useState(false);
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
@@ -26,6 +29,7 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+    setModal(false);
   };
 
   // Get post from child component
@@ -35,7 +39,10 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
+      <Button onClick={() => {setModal(true);}}>Создать пост</Button>
+      <Modal visible={modal} setVisible={setModal}>
+        <PostForm create={createPost} />
+      </Modal>
       <hr style={{ margin: "16px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
       <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Список постов" />
