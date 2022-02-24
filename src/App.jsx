@@ -5,7 +5,8 @@ import PostForm from "./components/PostForm.jsx";
 import PostFilter from "./components/PostFilter.jsx";
 import Modal from "./components/UI/Modal/Modal.jsx";
 import Button from "./components/UI/Buttons/Button.jsx";
-import { usePosts } from "./hooks/usePosts.jsx";
+import { usePosts } from "./hooks/usePosts.js";
+import { useFetching } from "./hooks/useFetching.js";
 import PostService from "./api/PostService.js";
 import Loader from "./components/UI/Loader/Loader.jsx";
 
@@ -14,18 +15,14 @@ function App() {
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  const [fetchPosts, isPostsLoading, fetchingError] = useFetching(async () => {
+    const posts = await PostService.getAll();
+    setPosts(posts);
+  });
 
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  async function fetchPosts() {
-    setIsPostsLoading(true);
-    const posts = await PostService.getAll();
-    setPosts(posts);
-    setIsPostsLoading(false);
-  }
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -46,6 +43,9 @@ function App() {
       </Modal>
       <hr style={{ margin: "16px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
+      {fetchingError &&
+        <h2 style={{ textAlign: "center", marginTop: "16px" }}>Произошла ошибка ${fetchingError}</h2>
+      }
       {isPostsLoading
         ? <div style={{ display: "flex", justifyContent: "center", marginTop: "16px" }}><Loader /></div>
         : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Список постов" />
