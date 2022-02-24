@@ -47,39 +47,3 @@
     transform: translateX(150px);
     transition: all 300ms ease-out;
 }
-
-.pages__wrapper {
-    margin-top: 30px;
-    display: flex;
-}
-
-.page {
-    padding: 8px 16px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    min-width: 52px;
-    background: white;
-    color: dodgerblue;
-    border: 1px solid dodgerblue;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.page:last-child {
-    margin-right: 0;
-}
-
-.page:hover {
-    background: #f0f0f0;
-}
-
-.page__current {
-    background: dodgerblue;
-    color: white;
-}
-
-.page__current:hover {
-    background: dodgerblue;
-    opacity: 0.7;
-}
