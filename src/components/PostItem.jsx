@@ -3,7 +3,7 @@ import Button from "./UI/Buttons/Button.jsx";
 import { useNavigate } from "react-router-dom";
 
 const PostItem = (props) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="post">
@@ -14,7 +14,7 @@ const PostItem = (props) => {
         </div>
       </div>
       <div className="post__btns">
-        <Button style={{ marginRight: "16px" }} onClick={() => navigate(`/posts/${props.post.id}`)}>
+        <Button style={{ marginRight: "16px" }} onClick={() => navigate(`/posts/${props.post.id}`, { replace: true })}>
           Открыть
         </Button>
         <Button onClick={() => props.remove(props.post)}>

@@ -1,20 +1,21 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import About from "../pages/About.jsx";
-import Post from "../pages/Post.jsx";
-import Posts from "../pages/Posts.jsx";
-import Home from "../pages/Home.jsx";
-import NotFound from "../pages/NotFound.jsx";
+import { publicRoutes, privateRoutes } from "../router/index.js";
 
 const AppRouter = () => {
+  const isAuth = true;
   return (
-    <Routes>
-      <Route path="/about" element={<About />} />
-      <Route path="/posts/:id" element={<Post />} />
-      <Route path="/posts" element={<Posts />} />
-      <Route path="/" element={<Home />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    isAuth
+      ? <Routes>
+        {privateRoutes.map(route =>
+          <Route key={route.path} path={route.path} element={route.element} />,
+        )}
+      </Routes>
+      : <Routes>
+        {publicRoutes.map(route =>
+          <Route key={route.path} path={route.path} element={route.element} />,
+        )}
+      </Routes>
   );
 };
 
