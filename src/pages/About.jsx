@@ -1,7 +1,9 @@
 const About = () => {
   return (
     <div className="container container--padding-top container--padding-bottom">
-      <h1>About Page</h1>
+      <div className="content">
+        <h1 className="page-title">About Page</h1>
+      </div>
     </div>
   );
 };
