@@ -48,7 +48,7 @@ function Posts() {
 
   return (
     <div className="container container--padding-top container--padding-bottom">
-      <Button style={{ marginRight: "16px" }} onClick={fetchPosts}>Запросить посты</Button>
+      <Button style={{ marginRight: "16px" }} onClick={() => fetchPosts()}>Запросить посты</Button>
       <Button onClick={() => {setModal(true);}}>Создать пост</Button>
       <Modal visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
