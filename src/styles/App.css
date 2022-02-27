@@ -5,8 +5,22 @@
 }
 
 #root {
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+}
+
+.container {
+    padding: 0 16px;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.container--padding-top {
+    padding-top: 24px;
+}
+
+.container--padding-bottom {
+    padding-bottom: 24px;
 }
 
 .App {
