@@ -9,6 +9,7 @@ import { useFetching } from "../hooks/useFetching.js";
 import { useObserver } from "../hooks/useObserver.js";
 import PostService from "../api/PostService.js";
 import Loader from "../components/UI/Loader/Loader.jsx";
+import Select from "../components/UI/Selects/Select.jsx";
 import { getPagesCount } from "../utils/pages.js";
 import Pagination from "../components/UI/Pagination/Pagination.jsx";
 
@@ -35,7 +36,7 @@ function Posts() {
 
   useEffect(() => {
     fetchPosts(limit, page);
-  }, [page]);
+  }, [page, limit]);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -60,6 +61,17 @@ function Posts() {
       </Modal>
       <hr style={{ margin: "16px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
+      <Select
+        value={limit}
+        onChange={value => setLimit(value)}
+        defaultValue="Кол-во элементов на странице"
+        options={[
+          { value: 5, name: "5" },
+          { value: 10, name: "10" },
+          { value: 25, name: "25" },
+          { value: -1, name: "Показать все" },
+        ]}
+      />
       {fetchingError &&
         <h2 style={{ textAlign: "center", marginTop: "16px" }}>Произошла ошибка ${fetchingError}</h2>
       }
