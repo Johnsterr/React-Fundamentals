@@ -1,9 +1,11 @@
-import React from "react";
+import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "../router/index.js";
+import { AuthContext } from "../context/index.js";
 
 const AppRouter = () => {
-  const isAuth = true;
+  const { isAuth } = useContext(AuthContext);
+
   return (
     isAuth
       ? <Routes>

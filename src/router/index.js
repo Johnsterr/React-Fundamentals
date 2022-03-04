@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import About from "../pages/About.jsx";
 import Post from "../pages/Post.jsx";
@@ -15,5 +16,5 @@ export const privateRoutes = [
 
 export const publicRoutes = [
   { path: "/login", element: <Login /> },
-  { path: "*", element: <Login /> },
+  { path: "*", element: <Navigate to="login" replace /> },
 ];
